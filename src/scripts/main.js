@@ -113,19 +113,17 @@ const businesses = [
 
 //foreach method example
 //put each business on DOM using foreach
-const outEl = document.querySelector("#output")
-outEl.innerHTML = "<h1>Active Businesses</h1>"
 
 /* businesses.forEach(business => {
     const zipcodeKey = "addressZipCode"
     outEl.innerHTML += `
     <h2>${business.companyName}</h2>
     <section>
-      ${business.addressFullStreet}
+    ${business.addressFullStreet}
     </section>
     <section>${business.addressCity}, ${business["addressStateCode"]} ${business[zipcodeKey]}
     </section>
-  `
+    `
     outEl.innerHTML += "<hr/>"
 }); */
 
@@ -133,7 +131,7 @@ outEl.innerHTML = "<h1>Active Businesses</h1>"
 //create new array containing only NY businesses
 //filter method HAS to use boolean values
 
-const newYorkBusinesses = businesses.filter(business => {
+/* const newYorkBusinesses = businesses.filter(business => {
     let inNewYork = false
     //default assumption is that business is NOT in NY
     if (business.addressStateCode === "NY") {
@@ -141,8 +139,8 @@ const newYorkBusinesses = businesses.filter(business => {
     }
 
     return inNewYork
-  }
-)
+}
+) */
 
 // console.log(newYorkBusinesses)
 //filter method will ALWAYS return an array. If nothing matches the filter, it will return an EMPTY array.
@@ -152,11 +150,11 @@ const newYorkBusinesses = businesses.filter(business => {
     outEl.innerHTML += `
     <h2>${business.companyName}</h2>
     <section>
-      ${business.addressFullStreet}
+    ${business.addressFullStreet}
     </section>
     <section>${business.addressCity}, ${business["addressStateCode"]} ${business[zipcodeKey]}
     </section>
-  `
+    `
     outEl.innerHTML += "<hr/>"
 }); */
 
@@ -175,46 +173,42 @@ const newYorkBusinesses = businesses.filter(business => {
     outEl.innerHTML += `
     <h2>${business.companyName}</h2>
     <section>
-      ${business.addressFullStreet}
+    ${business.addressFullStreet}
     </section>
     <section>${business.addressCity}, ${business["addressStateCode"]} ${business["addressZipCode"]}
     </section>
-  `
+    `
     outEl.innerHTML += "<hr/>"
 }) */
 
 //map method
 /*
-    Using map(), you extract the purchasing agent object
-    from each business and store it in a new array
+Using map(), you extract the purchasing agent object
+from each business and store it in a new array
 */
 
 //the new array will be called agents (see below)
 
-const agents = businesses.map(business => {
-    return business.purchasingAgent
-})
-
-console.table(agents)
+// console.table(agents)
 
 /* agents.forEach(agent => {
-  outEl.innerHTML += `<h2>${agent.nameFirst} ${agent.nameLast}</h2>`;
-  outEl.innerHTML += "<hr/>";
+    outEl.innerHTML += `<h2>${agent.nameFirst} ${agent.nameLast}</h2>`;
+    outEl.innerHTML += "<hr/>";
 }); */
 
 //map methods return an array, a for each method returns nothing
 
 // Lightning Exercise: Instead of just returning the purchasing agent object, return a new object that has the full name of the purchasing agent, the company name, and the phone number. The data structure is shown below. Use that new data structure to display the agent with their company and phone number
 
-const agentsWithCompanyAndPhone = businesses.map(business => {
+/* const agentsWithCompanyAndPhone = businesses.map(business => {
     return {
         "fullName": `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`,
         "company": business.companyName,
         "phoneNumber": business.phoneWork
     }
-})
+}) */
 
-console.log(agentsWithCompanyAndPhone)
+/* console.log(agentsWithCompanyAndPhone)
 
 agentsWithCompanyAndPhone.forEach(agent => {
     outEl.innerHTML += `
@@ -224,5 +218,79 @@ agentsWithCompanyAndPhone.forEach(agent => {
     outEl.innerHTML += `<p>${agent.phoneNumber}
     </p>`
     outEl.innerHTML += "<hr/>"
-})
+}) */
 
+
+//find method
+
+
+/* const agents = businesses.map(business => {
+    return business.purchasingAgent
+}) */
+
+/* document
+.querySelector("#companySearch")
+.addEventListener("keypress", keyPressEvent => {
+    if (keyPressEvent.charCode === 13) { */
+        /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
+        /*  const foundBusiness = businesses.find(
+            business =>
+            business.companyName.toLowerCase().includes(keyPressEvent.target.value.toLowerCase())
+            //toLowerCase() makes both search and results lowercase so that they will match up in search results
+            ); */
+            
+            /*            outEl.innerHTML = `
+            <h2>
+            ${foundBusiness.companyName}
+            </h2>
+            <section>
+            ${foundBusiness.addressFullStreet}
+            
+            </section>
+            <section>
+            ${foundBusiness.addressCity},
+            ${foundBusiness.addressStateCode}
+            ${foundBusiness.addressZipCode}
+            </section>
+            `;
+        }
+    }); */
+    
+const outEl = document.querySelector("#output")
+outEl.innerHTML += "<h1>Search Results</h1>"
+
+//Find Method lightning exercise 1
+//Refactor your code to search for purchasing agents instead. If the search text is found in the first name of any purchasing agent, show that agent.
+
+//Lightning Exercise 2: Refactor your code so that if the search text is found in the first name, or last name, of any purchasing agent, show that agent.
+
+document
+    .querySelector("#companySearch")
+    .addEventListener("keypress", keyPressEvent => {
+        if (keyPressEvent.charCode === 13) {
+            /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
+            const foundAgent = businesses.find(business => {
+                /* const agentFirst = business.purchasingAgent.nameFirst
+                const agentLast = business.purchasingAgent.nameLast
+                const input = keyPressEvent.target.value    */
+                //Jisie recommended using variables above to simplify code below 
+                business.purchasingAgent.nameFirst.toLowerCase().includes(keyPressEvent.target.value.toLowerCase()) ||business.purchasingAgent.nameLast.toLowerCase().includes(keyPressEvent.target.value.toLowerCase()) 
+                //the above could also be:
+                /* return agentFirst.includes(input) || agentLast.includes(input)  */
+                    //toLowerCase() makes both search and results lowercase so that they will match up in search results
+            })
+
+
+            outEl.innerHTML = `
+                <h2>
+                ${foundAgent.purchasingAgent["nameFirst"]} ${foundAgent.purchasingAgent["nameLast"]}
+                </h2>
+                <section>
+                ${foundAgent.companyName}
+                </section>
+                <section>
+                ${foundAgent.phoneWork}
+                </section>
+            `;
+        }
+    });
