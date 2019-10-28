@@ -147,7 +147,7 @@ const newYorkBusinesses = businesses.filter(business => {
 console.log(newYorkBusinesses)
 //filter method will ALWAYS return an array. If nothing matches the filter, it will return an EMPTY array.
 
-newYorkBusinesses.forEach(business => {
+/* newYorkBusinesses.forEach(business => {
     const zipcodeKey = "addressZipCode"
     outEl.innerHTML += `
     <h2>${business.companyName}</h2>
@@ -158,4 +158,28 @@ newYorkBusinesses.forEach(business => {
     </section>
   `
     outEl.innerHTML += "<hr/>"
-});
+}); */
+
+//Lightning Exercise: Use filter() to create another array named manufacturingBusinesses that will contain all businesses in the manufacturing industry. Display those to the DOM.
+
+const manufacturingBusinesses = businesses.filter(business => {
+    let isManufacturingBiz = false
+    if (business.companyIndustry === "Manufacturing") {
+        isManufacturingBiz = true
+    }
+
+    return isManufacturingBiz
+})
+
+manufacturingBusinesses.forEach(business => {
+    outEl.innerHTML += `
+    <h2>${business.companyName}</h2>
+    <section>
+      ${business.addressFullStreet}
+    </section>
+    <section>${business.addressCity}, ${business["addressStateCode"]} ${business["addressZipCode"]}
+    </section>
+  `
+    outEl.innerHTML += "<hr/>"
+})
+
