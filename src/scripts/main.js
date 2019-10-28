@@ -163,12 +163,12 @@ console.log(newYorkBusinesses)
 //Lightning Exercise: Use filter() to create another array named manufacturingBusinesses that will contain all businesses in the manufacturing industry. Display those to the DOM.
 
 const manufacturingBusinesses = businesses.filter(business => {
-    let isManufacturingBiz = false
     if (business.companyIndustry === "Manufacturing") {
-        isManufacturingBiz = true
+        return true
     }
-
-    return isManufacturingBiz
+    else {
+        return false
+    }
 })
 
 manufacturingBusinesses.forEach(business => {
