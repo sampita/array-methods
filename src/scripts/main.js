@@ -226,22 +226,22 @@ agentsWithCompanyAndPhone.forEach(agent => {
 const outEl = document.querySelector("#output")
 outEl.innerHTML += "<h1>Search Results</h1>"
 
-const agents = businesses.map(business => {
+/* const agents = businesses.map(business => {
     return business.purchasingAgent
-})
+}) */
 
-document
+/* document
     .querySelector("#companySearch")
     .addEventListener("keypress", keyPressEvent => {
-        if (keyPressEvent.charCode === 13) {
+        if (keyPressEvent.charCode === 13) { */
             /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
-            const foundBusiness = businesses.find(
+           /*  const foundBusiness = businesses.find(
                 business =>
                     business.companyName.toLowerCase().includes(keyPressEvent.target.value.toLowerCase())
                     //toLowerCase() makes both search and results lowercase so that they will match up in search results
-            );
+            ); */
 
-            outEl.innerHTML = `
+ /*            outEl.innerHTML = `
                 <h2>
                 ${foundBusiness.companyName}
                 </h2>
@@ -253,6 +253,34 @@ document
                 ${foundBusiness.addressCity},
                 ${foundBusiness.addressStateCode}
                 ${foundBusiness.addressZipCode}
+                </section>
+            `;
+        }
+    }); */
+
+//Find Method lightning exercise 1
+//Refactor your code to search for purchasing agents instead. If the search text is found in the first name of any purchasing agent, show that agent.
+
+document
+    .querySelector("#companySearch")
+    .addEventListener("keypress", keyPressEvent => {
+        if (keyPressEvent.charCode === 13) {
+            /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
+            const foundAgent = businesses.find(
+                business =>
+                    business.purchasingAgent.nameFirst.toLowerCase().includes(keyPressEvent.target.value.toLowerCase())
+                    //toLowerCase() makes both search and results lowercase so that they will match up in search results
+            );
+
+            outEl.innerHTML = `
+                <h2>
+                ${foundAgent.purchasingAgent["nameFirst"]} ${foundAgent.purchasingAgent["nameLast"]}
+                </h2>
+                <section>
+                ${foundAgent.companyName}
+                </section>
+                <section>
+                ${foundAgent.phoneWork}
                 </section>
             `;
         }
