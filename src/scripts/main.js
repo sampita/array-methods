@@ -111,11 +111,43 @@ const businesses = [
     }
 ];
 
-
+//foreach method example
+//put each business on DOM using foreach
 const outEl = document.querySelector("#output")
 outEl.innerHTML = "<h1>Active Businesses</h1>"
 
-businesses.forEach(business => {
+/* businesses.forEach(business => {
+    const zipcodeKey = "addressZipCode"
+    outEl.innerHTML += `
+    <h2>${business.companyName}</h2>
+    <section>
+      ${business.addressFullStreet}
+    </section>
+    <section>${business.addressCity}, ${business["addressStateCode"]} ${business[zipcodeKey]}
+    </section>
+  `
+    outEl.innerHTML += "<hr/>"
+}); */
+
+//filter method example
+//create new array containing only NY businesses
+//filter method HAS to use boolean values
+
+const newYorkBusinesses = businesses.filter(business => {
+    let inNewYork = false
+    //default assumption is that business is NOT in NY
+    if (business.addressStateCode === "NY") {
+        inNewYork = true
+    }
+
+    return inNewYork
+  }
+)
+
+console.log(newYorkBusinesses)
+//filter method will ALWAYS return an array. If nothing matches the filter, it will return an EMPTY array.
+
+newYorkBusinesses.forEach(business => {
     const zipcodeKey = "addressZipCode"
     outEl.innerHTML += `
     <h2>${business.companyName}</h2>
