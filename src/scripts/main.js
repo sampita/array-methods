@@ -144,7 +144,7 @@ const newYorkBusinesses = businesses.filter(business => {
   }
 )
 
-console.log(newYorkBusinesses)
+// console.log(newYorkBusinesses)
 //filter method will ALWAYS return an array. If nothing matches the filter, it will return an EMPTY array.
 
 /* newYorkBusinesses.forEach(business => {
@@ -162,16 +162,16 @@ console.log(newYorkBusinesses)
 
 //Lightning Exercise: Use filter() to create another array named manufacturingBusinesses that will contain all businesses in the manufacturing industry. Display those to the DOM.
 
-const manufacturingBusinesses = businesses.filter(business => {
+/* const manufacturingBusinesses = businesses.filter(business => {
     if (business.companyIndustry === "Manufacturing") {
         return true
     }
     else {
         return false
     }
-})
+}) */
 
-manufacturingBusinesses.forEach(business => {
+/* manufacturingBusinesses.forEach(business => {
     outEl.innerHTML += `
     <h2>${business.companyName}</h2>
     <section>
@@ -180,6 +180,49 @@ manufacturingBusinesses.forEach(business => {
     <section>${business.addressCity}, ${business["addressStateCode"]} ${business["addressZipCode"]}
     </section>
   `
+    outEl.innerHTML += "<hr/>"
+}) */
+
+//map method
+/*
+    Using map(), you extract the purchasing agent object
+    from each business and store it in a new array
+*/
+
+//the new array will be called agents (see below)
+
+const agents = businesses.map(business => {
+    return business.purchasingAgent
+})
+
+console.table(agents)
+
+/* agents.forEach(agent => {
+  outEl.innerHTML += `<h2>${agent.nameFirst} ${agent.nameLast}</h2>`;
+  outEl.innerHTML += "<hr/>";
+}); */
+
+//map methods return an array, a for each method returns nothing
+
+// Lightning Exercise: Instead of just returning the purchasing agent object, return a new object that has the full name of the purchasing agent, the company name, and the phone number. The data structure is shown below. Use that new data structure to display the agent with their company and phone number
+
+const agentsWithCompanyAndPhone = businesses.map(business => {
+    return {
+        "fullName": `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`,
+        "company": business.companyName,
+        "phoneNumber": business.phoneWork
+    }
+})
+
+console.log(agentsWithCompanyAndPhone)
+
+agentsWithCompanyAndPhone.forEach(agent => {
+    outEl.innerHTML += `
+    <h2>${agent.fullName}</h2>`
+    outEl.innerHTML += 
+    `<p>${agent.company}</p>`
+    outEl.innerHTML += `<p>${agent.phoneNumber}
+    </p>`
     outEl.innerHTML += "<hr/>"
 })
 
