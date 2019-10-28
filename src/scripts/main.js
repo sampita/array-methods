@@ -294,3 +294,6 @@ document
             `;
         }
     });
+
+//reduce method
+
